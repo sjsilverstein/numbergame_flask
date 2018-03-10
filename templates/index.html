@@ -1,0 +1,39 @@
+<!-- Stephen Silverstein
+	https://github.com/sjsilverstein -->
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title></title>
+		<meta name="description" content="The text here describes what the webpage
+		is about. It's what will show up in search results for search engines like
+		google under the title of the webpage. It's important that this is relevant
+		to your page and well written!">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/myStyle.css')}}"> <!-- my style.css -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="{{ url_for('static', filename='js/myJavaScript.js') }}"></script> <!-- myJavaScript -->
+	</head>
+	<body>
+		<div class="wrapper">
+			<h1>Welcome to the Great Number Game!</h1>
+			<h2>I am thinking of a number between 1 and 100</h2>
+			<h2>Take a Guess!</h2>
+			<form method="POST" action="/guess">
+				<p>Your guess: <input type="text" name="guess"></p>
+				<input type="submit" name="submit" value="submit">
+			</form>
+			{% if session['guessIs'] == 'win' %}
+			<div><p>You Win!</p>
+				<form action="/reset" method="POST">
+					<input type="submit" name="reset" value="Reset Game">
+				</form></div>
+			{% endif %}
+			{% if session['guessIs'] == 'high' %}
+			<div><p>Your guess is too Hgih!</p></div>
+			{% endif %}
+			{% if session['guessIs'] == 'low' %}
+			<div><p>Your Guess is too Low</p></div>
+			{% endif %}
+		</div>
+	</body>
+	</html>
